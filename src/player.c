@@ -10,7 +10,7 @@ struct player {
 
 struct player* player_new() {
     struct player* player = malloc(sizeof(struct player));
-    if (player == NULL) return;
+    if (player == NULL) return NULL;
 
     player->x = 0;
     player->y = 0;

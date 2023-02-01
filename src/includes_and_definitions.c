@@ -3,14 +3,19 @@
 
 #include <SDL2/SDL.h>
 
-#ifndef PLATINUM_WORLD_FILE
-#define PLATINUM_WORLD_FILE
-    #include "world.c"
-#endif
-
 #ifndef PLATINUM_PLAYER_FILE
 #define PLATINUM_PLAYER_FILE
     #include "player.c"
+#endif
+
+#ifndef PLATINUM_CAMERA_FILE
+#define PLATINUM_CAMERA_FILE
+    #include "camera.c"
+#endif
+
+#ifndef PLATINUM_WORLD_FILE
+#define PLATINUM_WORLD_FILE
+    #include "world.c"
 #endif
 
 #define SCREEN_WIDTH 640

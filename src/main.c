@@ -88,9 +88,7 @@ void program_loop(void* loop_argument) {
         break;
     }
 
-    SDL_SetRenderDrawColor(program->renderer, 25, 25, 50, 0);
-    SDL_RenderClear(program->renderer);
-    SDL_RenderPresent(program->renderer);
+    world_render(program->renderer, program->world);
 }
 
 int main(void) {
