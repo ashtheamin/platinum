@@ -15,6 +15,8 @@ struct program {
     SDL_Window* window;
     SDL_Renderer* renderer;
     enum program_status status;
+
+    struct world* world;
 };
 
 // Create new program state. Returns NULL on failure.
@@ -49,6 +51,15 @@ struct program* program_new() {
         SDL_Quit();free(program);return NULL;
     }
 
+    // Initialise world.
+    program->world = world_new();
+    if (program->world == NULL) {
+        printf("Failed to init world");\
+        SDL_DestroyRenderer(program->renderer);\
+        SDL_DestroyWindow(program->window);\
+        SDL_Quit();free(program);return NULL;  
+    }
+
     // Initialise program state values.
     program->status = program_status_running;
 
@@ -60,6 +71,7 @@ void program_quit(struct program* program) {
     if (program == NULL) return;
     if (program->renderer != NULL) {SDL_DestroyRenderer(program->renderer);};
     if (program->window != NULL) {SDL_DestroyWindow(program->window);};
+    if (program->world != NULL) {world_quit(program->world);};
     SDL_Quit();
     free(program);
 }
@@ -76,7 +88,7 @@ void program_loop(void* loop_argument) {
         break;
     }
 
-    SDL_SetRenderDrawColor(program->renderer, 0, 0, 0, 0);
+    SDL_SetRenderDrawColor(program->renderer, 25, 25, 50, 0);
     SDL_RenderClear(program->renderer);
     SDL_RenderPresent(program->renderer);
 }
