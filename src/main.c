@@ -44,7 +44,7 @@ struct program* program_new() {
 
     // Initialise SDL Renderer.
     program->renderer = SDL_CreateRenderer\
-    (program->window, -1, SDL_RENDERER_ACCELERATED);
+    (program->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (program->renderer == NULL) {
         printf("Failed to init SDL Renderer. SDL_GetError(): %s",\
         SDL_GetError());SDL_DestroyWindow(program->window);\
@@ -80,17 +80,16 @@ void program_loop(void* loop_argument) {
     struct program* program = (struct program*)loop_argument;
     if (program == NULL) return;
     SDL_Event event;
-    SDL_Delay(16);
+    //SDL_Delay(16);
     while (SDL_PollEvent(&event) != 0) {
         if (event.type == SDL_QUIT) {
             program->status = program_status_quit;
         }
-        if (event.type == SDL_KEYDOWN) {
-            world_input(event, program->world);
-        }
+        world_input(event, program->world);
         break;
     }
-
+    
+    world_update(program->world);
     world_render(program->renderer, program->world);
 }
 

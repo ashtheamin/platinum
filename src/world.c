@@ -30,48 +30,17 @@ void world_quit(struct world* world) {
     return;
 }
 
-void world_input(SDL_Event event, struct world* world) {
-    if (world == NULL) return;
-    
-    switch(event.key.keysym.sym) {
-        case SDLK_w:
-            if (world->player->y - world->player->speed >= 0) {
-                world->player->y -= world->player->speed;
-            }
-            break;
-
-        case SDLK_s:
-            if (world->player->y + world->player->speed <= WORLD_HEIGHT) {
-                world->player->y += world->player->speed;
-            }
-            break;
-
-        case SDLK_a:
-            if (world->player->x - world->player->speed >= 0) {
-                world->player->x -= world->player->speed;
-            }
-            break;
-
-        case SDLK_d:
-            if (world->player->x + world->player->speed <= WORLD_WIDTH) {
-                world->player->x += world->player->speed;
-            }
-            break;
-    }
-}
-
 void world_render(SDL_Renderer* renderer, struct world* world) {
     if (renderer == NULL || world == NULL) return;
     if (world->camera == NULL || world->player == NULL) return;
 
-    SDL_Rect rect;
-    rect.x = world->player->x - world->camera->x;
-    rect.y = world->player->y - world->camera->y;
-    rect.w = 10; rect.h = 10;
+    player_render(renderer, world->player, world->camera);
+}
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
-    SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderPresent(renderer);
+void world_input(SDL_Event event, struct world* world) {
+    player_input(event, world->player);
+}
+
+void world_update(struct world* world) {
+    player_move(world->player);
 }
