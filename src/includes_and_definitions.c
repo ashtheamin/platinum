@@ -8,16 +8,14 @@
     #include "world.c"
 #endif
 
-#ifndef PLATINUM_MAP_FILE
-#define PLATINUM_MAP_FILE
-    #include "map.c"
+#ifndef PLATINUM_PLAYER_FILE
+#define PLATINUM_PLAYER_FILE
+    #include "player.c"
 #endif
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
-#define TILE_ROWS 50
-#define TILE_COLUMNS 30
+#define WORLD_WIDTH 10000
+#define WORLD_HEIGHT 10000
 
-#define TILE_WIDTH SCREEN_WIDTH/50
-#define TILE_HEIGHT SCREEN_HEIGHT/30

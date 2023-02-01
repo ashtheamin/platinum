@@ -4,19 +4,22 @@
 #endif
 
 struct world {
-    struct map* map;    
+    struct player* player; 
 };
 
 struct world* world_new() {
     struct world* world = malloc(sizeof(struct world));
     if (world == NULL) return NULL;
-    world->map = map_new();
+
+    world->player = player_new();
+    if (world->player == NULL) {free(world);return NULL;};
+
     return world;
 }
 
 void world_quit(struct world* world) {
     if (world == NULL) return;
-    if (world->map != NULL) map_quit(world->map);
+    if (world->player != NULL) {player_free(world->player);};
     free(world);
     return;
 }
