@@ -30,6 +30,36 @@ void world_quit(struct world* world) {
     return;
 }
 
+void world_input(SDL_Event event, struct world* world) {
+    if (world == NULL) return;
+    
+    switch(event.key.keysym.sym) {
+        case SDLK_w:
+            if (world->player->y - world->player->speed >= 0) {
+                world->player->y -= world->player->speed;
+            }
+            break;
+
+        case SDLK_s:
+            if (world->player->y + world->player->speed <= WORLD_HEIGHT) {
+                world->player->y += world->player->speed;
+            }
+            break;
+
+        case SDLK_a:
+            if (world->player->x - world->player->speed >= 0) {
+                world->player->x -= world->player->speed;
+            }
+            break;
+
+        case SDLK_d:
+            if (world->player->x + world->player->speed <= WORLD_WIDTH) {
+                world->player->x += world->player->speed;
+            }
+            break;
+    }
+}
+
 void world_render(SDL_Renderer* renderer, struct world* world) {
     if (renderer == NULL || world == NULL) return;
     if (world->camera == NULL || world->player == NULL) return;

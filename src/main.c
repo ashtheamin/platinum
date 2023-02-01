@@ -85,6 +85,9 @@ void program_loop(void* loop_argument) {
         if (event.type == SDL_QUIT) {
             program->status = program_status_quit;
         }
+        if (event.type == SDL_KEYDOWN) {
+            world_input(event, program->world);
+        }
         break;
     }
 

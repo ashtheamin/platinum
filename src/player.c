@@ -6,6 +6,7 @@
 struct player {
     int x;
     int y;
+    int speed;
 };
 
 struct player* player_new() {
@@ -14,6 +15,7 @@ struct player* player_new() {
 
     player->x = 0;
     player->y = 0;
+    player->speed = 10;
 
     return player;
 }

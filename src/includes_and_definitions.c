@@ -3,6 +3,13 @@
 
 #include <SDL2/SDL.h>
 
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
+#define WORLD_WIDTH 10000
+#define WORLD_HEIGHT 10000
+
+
 #ifndef PLATINUM_PLAYER_FILE
 #define PLATINUM_PLAYER_FILE
     #include "player.c"
@@ -18,9 +25,4 @@
     #include "world.c"
 #endif
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-
-#define WORLD_WIDTH 10000
-#define WORLD_HEIGHT 10000
 
