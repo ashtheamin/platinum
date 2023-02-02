@@ -35,8 +35,8 @@ struct player* player, struct camera* camera) {
     if (renderer == NULL || player == NULL || camera == NULL) return;
 
     SDL_Rect rect;
-    rect.x = player->position_x - camera->x;
-    rect.y = player->position_y - camera->y;
+    rect.x = player->position_x - camera->position_x;
+    rect.y = player->position_y - camera->position_y;
     rect.w = 10; rect.h = 10;
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);

@@ -39,8 +39,10 @@ void world_render(SDL_Renderer* renderer, struct world* world) {
 
 void world_input(SDL_Event event, struct world* world) {
     player_input(event, world->player);
+    camera_input(event, world->camera);
 }
 
 void world_update(struct world* world) {
     player_move(world->player);
+    camera_move(world->camera);
 }
