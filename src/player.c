@@ -4,8 +4,7 @@
 #endif
 
 struct player {
-    int position_x;
-    int position_y;
+    SDL_Rect rect;
     int velocity_x;
     int velocity_y;
     int velocity_max;
@@ -15,8 +14,10 @@ struct player* player_new() {
     struct player* player = malloc(sizeof(struct player));
     if (player == NULL) return NULL;
 
-    player->position_x = 0;
-    player->position_y = 0;
+    player->rect.x = 0;
+    player->rect.y = 0;
+    player->rect.w = 10;
+    player->rect.h = 10;
     player->velocity_x = 0;
     player->velocity_y = 0;
 
@@ -34,16 +35,13 @@ void player_render(SDL_Renderer* renderer, \
 struct player* player, struct camera* camera) {
     if (renderer == NULL || player == NULL || camera == NULL) return;
 
-    SDL_Rect rect;
-    rect.x = player->position_x - camera->position_x;
-    rect.y = player->position_y - camera->position_y;
-    rect.w = 10; rect.h = 10;
+    SDL_Rect render_rect;
+    render_rect.x = player->rect.x - camera->position_x;
+    render_rect.y = player->rect.y - camera->position_y;
+    render_rect.w = player->rect.w; render_rect.h = player->rect.h;
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
-    SDL_RenderFillRect(renderer, &rect);
-    SDL_RenderPresent(renderer);
+    SDL_RenderFillRect(renderer, &render_rect);
 }
 
 void player_input(SDL_Event event, struct player* player) {
@@ -71,14 +69,14 @@ void player_input(SDL_Event event, struct player* player) {
 void player_move(struct player* player) {
     if (player == NULL) return;
 
-    player->position_x += player->velocity_x;
-    if (player->position_x < 0 || player->position_x >= WORLD_WIDTH) {
-        player->position_x -= player->velocity_x;
+    player->rect.x += player->velocity_x;
+    if (player->rect.x  < 0 || player->rect.x  >= WORLD_WIDTH) {
+        player->rect.x  -= player->velocity_x;
     }
 
-    player->position_y += player->velocity_y;
-    if (player->position_y < 0 || player->position_y >= WORLD_HEIGHT) {
-        player->position_y -= player->velocity_y;
+    player->rect.y += player->velocity_y;
+    if (player->rect.y < 0 || player->rect.y >= WORLD_HEIGHT) {
+        player->rect.y -= player->velocity_y;
     }
    
 }
